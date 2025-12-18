@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Visual Portfolio | พื้นที่แสดงผลงานของฉัน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Anuphan', sans-serif;
+            background-color: #fafafa;
+        }
 
+        /* เอฟเฟกต์การซูมเมื่อเอาเมาส์วางบนรูป */
+        .gallery-item img {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* การทำ Overlay เมื่อ Hover */
+        .overlay {
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* ปรับแต่ง Masonry Layout เบื้องต้น */
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 10px;
+            gap: 20px;
+        }
+
+        /* ซ่อน Lightbox เป็นค่าเริ่มต้น */
+        #lightbox {
+            display: none;
+            background: rgba(0, 0, 0, 0.95);
+        }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <!-- Header / Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-40 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight">MY PORTFOLIO</h1>
+            <div class="space-x-8 hidden md:flex text-sm font-medium">
+                <a href="#" class="hover:text-blue-600 transition">หน้าหลัก</a>
+                <a href="#" class="hover:text-blue-600 transition">เกี่ยวกับฉัน</a>
+                <a href="#" class="hover:text-blue-600 transition">ติดต่อ</a>
+            </div>
+            <button class="md:hidden text-2xl"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-semibold mb-4">ผลงานที่คัดสรรมาเพื่อคุณ</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto italic">"การถ่ายทอดความคิดผ่านเลนส์และจินตนาการ"</p>
+        <div class="mt-8 flex justify-center gap-4">
+            <span class="px-4 py-1 bg-gray-200 rounded-full text-xs font-semibold cursor-pointer hover:bg-black hover:text-white transition">ทั้งหมด</span>
+            <span class="px-4 py-1 bg-gray-100 rounded-full text-xs font-semibold cursor-pointer hover:bg-black hover:text-white transition">การถ่ายภาพ</span>
+            <span class="px-4 py-1 bg-gray-100 rounded-full text-xs font-semibold cursor-pointer hover:bg-black hover:text-white transition">งานกราฟิก</span>
+        </div>
+    </header>
+
+    <!-- Gallery Grid -->
+    <main class="max-w-7xl mx-auto px-6 pb-20">
+        <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- ภาพที่ 1 (สมมติเป็นรูปแนวตั้ง) -->
+            <div class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80', 'กล้องฟิล์มคลาสสิก')">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="Camera" class="w-full h-[400px] object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <h3 class="font-semibold text-lg">กล้องฟิล์มคลาสสิก</h3>
+                    <p class="text-sm text-gray-200">หมวดหมู่: ถ่ายภาพ</p>
+                </div>
+            </div>
+
+            <!-- ภาพที่ 2 (สมมติเป็นรูปแนวนอน) -->
+            <div class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80', 'บันทึกการเดินทาง')">
+                <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80" alt="Journal" class="w-full h-[400px] object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <h3 class="font-semibold text-lg">บันทึกการเดินทาง</h3>
+                    <p class="text-sm text-gray-200">หมวดหมู่: ไลฟ์สไตล์</p>
+                </div>
+            </div>
+
+            <!-- ภาพที่ 3 -->
+            <div class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1472289065668-ce650ac443d2?auto=format&fit=crop&w=800&q=80', 'มุมมองสถาปัตยกรรม')">
+                <img src="https://images.unsplash.com/photo-1472289065668-ce650ac443d2?auto=format&fit=crop&w=800&q=80" alt="Architecture" class="w-full h-[400px] object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <h3 class="font-semibold text-lg">มุมมองสถาปัตยกรรม</h3>
+                    <p class="text-sm text-gray-200">หมวดหมู่: สถาปัตย์</p>
+                </div>
+            </div>
+
+            <!-- ภาพที่ 4 -->
+            <div class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&w=800&q=80', 'ความเงียบสงบ')">
+                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&w=800&q=80" alt="Quiet" class="w-full h-[400px] object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <h3 class="font-semibold text-lg">ความเงียบสงบ</h3>
+                    <p class="text-sm text-gray-200">หมวดหมู่: ธรรมชาติ</p>
+                </div>
+            </div>
+
+            <!-- ภาพที่ 5 -->
+            <div class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=800&q=80', 'แสงและเงา')">
+                <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=800&q=80" alt="Light" class="w-full h-[400px] object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <h3 class="font-semibold text-lg">แสงและเงา</h3>
+                    <p class="text-sm text-gray-200">หมวดหมู่: ถ่ายภาพ</p>
+                </div>
+            </div>
+
+            <!-- ภาพที่ 6 -->
+            <div class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group" onclick="openLightbox('https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80', 'สีสันของศิลปะ')">
+                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Art" class="w-full h-[400px] object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <h3 class="font-semibold text-lg">สีสันของศิลปะ</h3>
+                    <p class="text-sm text-gray-200">หมวดหมู่: ศิลปะ</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-4xl hover:text-gray-400 transition">&times;</button>
+        <div class="max-w-5xl w-full flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Zoomed" class="max-h-[80vh] object-contain rounded-lg shadow-2xl">
+            <div class="mt-6 text-center">
+                <h2 id="lightbox-title" class="text-white text-2xl font-bold"></h2>
+                <p id="lightbox-desc" class="text-gray-400 mt-2">คลิกด้านนอกเพื่อปิดหน้าต่างนี้</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-400 text-sm">© 2024 My Visual Portfolio. สร้างสรรค์ด้วยใจ.</p>
+            <div class="mt-4 flex justify-center space-x-6 text-gray-400">
+                <a href="#" class="hover:text-black transition text-xl"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-black transition text-xl"><i class="fa-brands fa-behance"></i></a>
+                <a href="#" class="hover:text-black transition text-xl"><i class="fa-brands fa-dribbble"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+
+        // ฟังก์ชันเปิด Lightbox
+        function openLightbox(url, title) {
+            lightboxImg.src = url;
+            lightboxTitle.innerText = title;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // กันเลื่อนหน้าเว็บ
+        }
+
+        // ฟังก์ชันปิด Lightbox
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // ปิดเมื่อคลิกพื้นหลัง
+        lightbox.onclick = function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        }
+
+        // ปิดด้วยปุ่ม Esc
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
