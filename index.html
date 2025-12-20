@@ -3,202 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Natthachai Sophokrom</title>
+    <title>Portfolio Natthachai Sophokrom | Professional Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #1e40af;
+            --accent-gold: #fbbf24;
+        }
         body {
             font-family: 'Kanit', sans-serif;
             scroll-behavior: smooth;
         }
-        .royal-blue {
-            color: #1e3a8a;
+        /* ทั้งหน้าเว็บจะมีพื้นหลังที่มี Texture และ Gradient */
+        .site-wrapper {
+            background: linear-gradient(to bottom, #f8fafc, #eff6ff, #f8fafc);
+            background-attachment: fixed;
+            position: relative;
         }
-        .bg-royal-blue {
-            background-color: #1e3a8a;
+        /* รูปแบบลายตารางจางๆ ทั่วทั้งหน้าเว็บ */
+        .site-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
         }
-        .image-placeholder {
-            background-color: #f8fafc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #cbd5e1;
+
+        .hero-section {
+            background: radial-gradient(circle at top right, rgba(30, 58, 138, 0.05), transparent),
+                        radial-gradient(circle at bottom left, rgba(30, 58, 138, 0.05), transparent);
         }
-        /* ปรับสไตล์รูปภาพให้ดูเป็นมืออาชีพ */
-        .portfolio-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
-        .portfolio-img:hover {
-            transform: scale(1.05);
+
+        .premium-card {
+            background: white;
+            border: 1px solid rgba(226, 232, 240, 1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 10px 10px -5px rgba(30, 58, 138, 0.04);
+            border-color: var(--primary-blue);
+        }
+
+        .gold-divider {
+            height: 4px;
+            width: 60px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+            border-radius: 2px;
+        }
+
+        .image-container {
+            position: relative;
+            border-radius: 24px;
+            padding: 12px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+
+        .timeline-dot::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+        }
+
+        /* Animation for section entry */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="site-wrapper">
 
-    <!-- [1] ส่วนแถบเมนูนำทาง (Navigation Bar) -->
-    <nav class="fixed w-full z-50 bg-white shadow-sm border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold royal-blue tracking-wide">บันทึกประวัติส่วนตัว</div>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#about" class="hover:text-blue-700 transition">ข้อมูลส่วนตัว</a>
-                <a href="#education" class="hover:text-blue-700 transition">ประวัติการศึกษา</a>
-                <a href="#work" class="hover:text-blue-700 transition">ประสบการณ์ทำงาน</a>
-                <a href="#portfolio" class="hover:text-blue-700 transition">ผลงานและเกียรติประวัติ</a>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">N</div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-bold text-blue-900 leading-none">PORTFOLIO</span>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-widest">Civil Servant Profile</span>
+                </div>
             </div>
-            <button class="md:hidden text-slate-600" id="mobile-menu-btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
+            <div class="hidden md:flex space-x-8 font-medium text-sm">
+                <a href="#home" class="text-blue-900 hover:text-blue-600 transition">หน้าแรก</a>
+                <a href="#education" class="text-slate-600 hover:text-blue-900 transition">การศึกษา</a>
+                <a href="#experience" class="text-slate-600 hover:text-blue-900 transition">ประสบการณ์</a>
+                <a href="#portfolio" class="text-slate-600 hover:text-blue-900 transition">ผลงาน</a>
+                <a href="mailto:Natthachai78@gmail.com" class="bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-blue-800 transition shadow-md">ติดต่อ</a>
+            </div>
         </div>
     </nav>
 
-    <!-- [2] ส่วนประวัติส่วนตัวและคติพจน์ (Personal Info & Motto) -->
-    <section id="about" class="pt-32 pb-20 px-4 bg-white">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div class="w-64 h-80 md:w-72 md:h-96 rounded-lg overflow-hidden shadow-lg border border-slate-200">
-                <!-- ใส่รูปถ่ายชุดสุภาพของคุณที่นี่ -->
-                <div class="w-full h-full image-placeholder bg-slate-100">
-                    <span class="text-slate-400 text-center p-4">[กรุณาอัปโหลดรูปชุดกากี/สุภาพ และใส่ลิงก์แทนที่จุดนี้]</span>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center pt-20 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-6">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                    </span>
+                    ข้าราชการยุคใหม่ มุ่งมั่น มั่นคง
                 </div>
-            </div>
-            <div class="flex-1 text-center md:text-left">
-                <h1 class="text-4xl font-bold mb-4 text-slate-900">นายณัฐชัย โสโภกรม</h1>
-                <p class="text-xl royal-blue font-medium mb-6">ผู้สมัครสอบตำแหน่ง เจ้าพนักงานธุรการปฏิบัติงาน</p>
-                <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 shadow-sm">
-                    <h3 class="text-lg font-semibold mb-3 border-b border-slate-200 pb-2">คติพจน์และความตั้งใจในการรับราชการ</h3>
-                    <p class="text-slate-600 leading-relaxed italic">
-                        "มุ่งมั่นปฏิบัติหน้าที่ด้วยความซื่อสัตย์ สุจริต ยึดถือประโยชน์ส่วนรวมและประชาชนเป็นที่ตั้ง 
-                        เพื่อสร้างสรรค์ความเจริญให้แก่หน่วยงานและประเทศชาติ"
-                    </p>
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-700">
-                        <div class="flex items-center gap-2"><span class="font-bold">วันเกิด:</span> 28 มีนาคม 2540 </div>
-                        <div class="flex items-center gap-2"><span class="font-bold">ภูมิลำเนา:</span> อุบลราชธานี </div>
-                        <div class="flex items-center gap-2"><span class="font-bold">อีเมล:</span> Natthachai78@gmail.com </div>
-                        <div class="flex items-center gap-2"><span class="font-bold">โทรศัพท์:</span> 088-107-2695 </div>
+                <h1 class="text-5xl lg:text-7xl font-bold text-slate-900 mb-4 leading-tight">
+                    นายณัฐชัย <br><span class="text-blue-900">โสโภกรม</span>
+                </h1>
+                <p class="text-2xl text-slate-600 mb-8 font-light italic">"เจ้าพนักงานธุรการปฏิบัติงาน"</p>
+                
+                <div class="grid grid-cols-2 gap-6 mb-10">
+                    <div class="border-l-4 border-amber-400 pl-4">
+                        <div class="text-3xl font-bold text-slate-800">2+</div>
+                        <div class="text-sm text-slate-500">ปี ประสบการณ์งานพัสดุ</div>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <div class="text-3xl font-bold text-slate-800">IT</div>
+                        <div class="text-sm text-slate-500">เชี่ยวชาญเทคโนโลยี</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- [3] ส่วนประวัติการศึกษา (Education Timeline) -->
-    <section id="education" class="py-20 bg-slate-50 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 royal-blue">ประวัติการศึกษา</h2>
-            <div class="relative border-l-2 border-blue-200 ml-4">
-                <div class="mb-10 ml-6">
-                    <span class="absolute -left-[9px] w-4 h-4 bg-royal-blue rounded-full"></span>
-                    <span class="text-sm font-bold royal-blue uppercase">ปีที่สำเร็จการศึกษา 2560 </span>
-                    <h3 class="text-xl font-bold mt-1 text-slate-900">ระดับประกาศนียบัติวิชาชีพชั้นสูง สาขาวิชาเทคโนโลยีคอมพิวเตอร์ </h3>
-                    <p class="text-slate-600 text-lg">วิทยาลัยเทคนิคอุบลราชธานี </p>
-                </div>
-                <div class="mb-10 ml-6">
-                    <span class="absolute -left-[9px] w-4 h-4 bg-blue-400 rounded-full"></span>
-                    <span class="text-sm font-bold text-blue-400 uppercase">ปีที่สำเร็จการศึกษา 2558 </span>
-                    <h3 class="text-xl font-bold mt-1 text-slate-900">ระดับประกาศนียบัติวิชาชีพ สาขาวิชาไฟฟ้าและอิเล็กทรอนิกส์ </h3>
-                    <p class="text-slate-600">วิทยาลัยเทคนิคอุบลราชธานี </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#experience" class="px-8 py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition shadow-xl flex items-center gap-2">
+                        ดูประวัติการทำงาน
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- [4] ส่วนประสบการณ์ทำงาน (Experience) -->
-    <section id="work" class="py-20 bg-white px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 royal-blue">ประสบการณ์ทำงาน</h2>
-            <div class="space-y-6">
-                 <div class="p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors">
-                    <div class="flex flex-col sm:flex-row justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">ตำแหน่งงาน เจ้าพนักงานเครื่องคอมพิวเตอร์ </h3>
-                            <p class="text-blue-700 font-medium">ฝ่ายประชาสัมพันธ์ ส่วนบริหารทั่วไป สำนักงานชลประทานที่ 7 อุบลราชธานี </p>
+            
+            <div class="order-1 lg:order-2 flex justify-center">
+                <div class="image-container shadow-2xl">
+                    <div class="bg-white rounded-[18px] overflow-hidden w-full max-w-[380px] aspect-[3/4] flex items-center justify-center text-slate-300">
+                        <div class="text-center p-10">
+                            <svg class="w-20 h-20 mx-auto mb-4 opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            <p class="font-medium text-slate-400 text-sm">[ แนะนำ: รูปถ่ายในเครื่องแบบราชการ หรือ ชุดสูทสากล เพื่อความเป็นมืออาชีพสูงสุด ]</p>
                         </div>
-                        <span class="text-sm font-bold text-slate-500"> ปัจจุบัน </span>
                     </div>
-                    <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน ซ่อมบำรุงเครื่องคอมพิวเตอร์ เครื่องปริ้นเตอร์ ระบบเครื่องข่ายในสำนักงาน และติดตามถ่ายรูปเพื่องานประชาสัมพันธ์ </li>
-                    </ul>
-                 </div>
-                 <div class="p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors">
-                    <div class="flex flex-col sm:flex-row justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">ตำแหน่งงาน เจ้าพนักงานเครื่องคอมพิวเตอร์ </h3>
-                            <p class="text-blue-700 font-medium">งานพัสดุ ฝ่ายบริหารทั่วไป โครงการส่งน้ำและบำรุงรักษาบางพลวง สำนักงานชลประทานที่ 9 ชลบุรี </p>
+                    <!-- Decorative badges -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden md:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">✓</div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Status</p>
+                                <p class="text-sm font-bold text-slate-800">พร้อมปฏิบัติหน้าที่</p>
+                            </div>
                         </div>
-                        <span class="text-sm font-bold text-slate-500"> 2 ปี </span>
-                    </div>
-                    <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน เอกสารงานด้านพัสดุ บริหารสัญญา ตรวจรับพัสดุ </li>
-                    </ul>
-                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- [5] ส่วนแสดงผลงานและใบประกาศ (Portfolio Gallery) -->
-    <section id="portfolio" class="py-20 bg-slate-50 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold royal-blue">ผลงานและเกียรติประวัติ</h2>
-                <p class="text-slate-500 mt-2">ภาพกิจกรรมและใบประกาศเกียรติคุณที่ภาคภูมิใจ</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- ชิ้นงานที่ 1: แสดงรูปจาก GitHub ของคุณ -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden group">
-                    <div class="h-56 overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC003_page-0001.jpg" 
-                             alt="ใบประกาศเกียรติคุณ" 
-                             class="portfolio-img">
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg mb-2 text-slate-900">ใบประกาศเกียรติคุณ</h3>
-                        <p class="text-slate-600 text-sm">รายละเอียดกิจกรรมหรือรางวัลที่ได้รับจากการทำงานหรือการศึกษา</p>
-                    </div>
-                </div>
-
-                <!-- ช่องสำรองที่ 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="h-56 image-placeholder">
-                        <span class="text-slate-400">[รูปภาพอบรม]</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg mb-2 text-slate-900">การอบรม/สัมมนา</h3>
-                        <p class="text-slate-600 text-sm">การพัฒนาตนเองในด้านต่างๆ ที่เกี่ยวข้องกับสายงาน</p>
-                    </div>
-                </div>
-
-                <!-- ช่องสำรองที่ 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="h-56 image-placeholder">
-                        <span class="text-slate-400">[รูปภาพกิจกรรม]</span>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg mb-2 text-slate-900">กิจกรรมเสริมหลักสูตร</h3>
-                        <p class="text-slate-600 text-sm">กิจกรรมอื่นๆ ที่แสดงถึงความมุ่งมั่นและความรับผิดชอบ</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- [6] ส่วนท้ายหน้าเว็บ (Footer) -->
-    <footer class="bg-slate-900 text-white py-12 px-4 text-center">
-        <div class="max-w-6xl mx-auto">
-            <p class="text-slate-400 mb-6">"วินัย ซื่อสัตย์ สุจริต มุ่งผลสัมฤทธิ์ของงาน"</p>
-            <div class="h-px bg-slate-800 w-full mb-8"></div>
-            <p class="text-sm text-slate-500 italic">Portfolio นี้จัดทำขึ้นเพื่อใช้ประกอบการพิจารณาสอบสัมภาษณ์เท่านั้น</p>
+    <!-- Motto / Vision -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-[40px] p-12 shadow-sm border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5">
+                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.01703C7.91246 16 7.01703 16.8954 7.01703 18L7.01703 21H14.017ZM21 21L21 18C21 16.8954 20.1046 16 19 16H16C14.8954 16 14 16.8954 14 18L14 21H21ZM12.017 14C14.2261 14 16.017 12.2091 16.017 10C16.017 7.79086 14.2261 6 12.017 6C9.80789 6 8.01703 7.79086 8.01703 10C8.01703 12.2091 9.80789 14 12.017 14ZM19 14C20.6569 14 22 12.6569 22 11C22 9.34315 20.6569 8 19 8C17.3431 8 16 9.34315 16 11C16 12.6569 17.3431 14 19 14Z"/></svg>
+                </div>
+                <div class="relative z-10 text-center">
+                    <h2 class="text-xl font-bold text-blue-900 mb-6 flex items-center justify-center gap-3">
+                        <span class="w-10 h-[1px] bg-blue-200"></span>
+                        วิสัยทัศน์และการทำงาน
+                        <span class="w-10 h-[1px] bg-blue-200"></span>
+                    </h2>
+                    <blockquote class="text-2xl md:text-3xl font-medium text-slate-800 leading-relaxed mb-8">
+                        "มุ่งมั่นปฏิบัติหน้าที่ด้วยความซื่อสัตย์ สุจริต <br class="hidden md:block"> ยึดถือประโยชน์ส่วนรวมและประชาชนเป็นที่ตั้ง"
+                    </blockquote>
+                    <div class="flex justify-center gap-4 flex-wrap">
+                        <span class="px-4 py-2 bg-slate-50 rounded-full text-sm text-slate-600 border border-slate-100">#วินัย</span>
+                        <span class="px-4 py-2 bg-slate-50 rounded-full text-sm text-slate-600 border border-slate-100">#โปร่งใส</span>
+                        <span class="px-4 py-2 bg-slate-50 rounded-full text-sm text-slate-600 border border-slate-100">#บริการประชาชน</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 px-6 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <h2 class="text-4xl font-bold text-slate-900 mb-2">ประวัติการศึกษา</h2>
+                    <div class="gold-divider"></div>
+                </div>
+                <p class="text-slate-500 max-w-md">พื้นฐานความรู้ด้านเทคโนโลยีคอมพิวเตอร์และไฟฟ้าที่นำมาประยุกต์ใช้ในงานระบบราชการ</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Edu Card 1 -->
+                <div class="premium-card p-10 rounded-[32px]">
+                    <div class="flex gap-6">
+                        <div class="hidden sm:flex flex-col items-center">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-900 text-2xl font-bold border border-blue-100 shadow-sm italic">TC</div>
+                            <div class="w-1 flex-1 bg-blue-50 my-2 rounded-full"></div>
+                        </div>
+                        <div>
+                            <span class="text-sm font-bold text-blue-600 mb-2 block tracking-widest uppercase">Graduate 2560</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-2 leading-tight">ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)</h3>
+                            <p class="text-lg text-slate-600 mb-4 italic">สาขาวิชาเทคโนโลยีคอมพิวเตอร์</p>
+                            <div class="flex items-center gap-2 text-slate-500 font-medium">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                วิทยาลัยเทคนิคอุบลราชธานี
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edu Card 2 -->
+                <div class="premium-card p-10 rounded-[32px]">
+                    <div class="flex gap-6">
+                        <div class="hidden sm:flex flex-col items-center">
+                            <div class="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 text-2xl font-bold border border-slate-100 shadow-sm italic">EE</div>
+                        </div>
+                        <div>
+                            <span class="text-sm font-bold text-slate-400 mb-2 block tracking-widest uppercase">Graduate 2558</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-2 leading-tight">ประกาศนียบัตรวิชาชีพ (ปวช.)</h3>
+                            <p class="text-lg text-slate-600 mb-4 italic">สาขาวิชาไฟฟ้าและอิเล็กทรอนิกส์</p>
+                            <div class="flex items-center gap-2 text-slate-500 font-medium">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                วิทยาลัยเทคนิคอุบลราชธานี
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 bg-blue-900 text-white px-6 relative overflow-hidden">
+        <!-- Abstract background elements -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] border-[60px] border-white rounded-full"></div>
+            <div class="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] border-[1px] border-white rounded-full"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-bold mb-4">ประสบการณ์การทำงาน</h2>
+                <div class="h-1 w-20 bg-amber-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Job 1 -->
+                <div class="flex flex-col md:flex-row gap-8 items-start reveal">
+                    <div class="md:w-1/3">
+                        <div class="text-amber-400 font-bold text-xl mb-1">ปัจจุบัน</div>
+                        <div class="text-blue-200 text-sm uppercase tracking-tighter">สำนักงานชลประทานที่ 7 อุบลราชธานี</div>
+                    </div>
+                    <div class="md:w-2/3 bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20">
+                        <h3 class="text-2xl font-bold mb-4">เจ้าพนักงานเครื่องคอมพิวเตอร์</h3>
+                        <p class="text-blue-100 leading-relaxed">
+                            ดูแลและซ่อมบำรุงรักษาเครื่องคอมพิวเตอร์ เครื่องพิมพ์ และระบบเครือข่ายภายในหน่วยงาน รวมถึงการออกแบบสื่อประชาสัมพันธ์เพื่อให้ข้อมูลเข้าถึงบุคลากรและประชาชนได้อย่างมีประสิทธิภาพ
+                        </p>
+                        <div class="mt-6 flex gap-2">
+                            <span class="text-[10px] px-2 py-1 bg-blue-800 rounded border border-blue-700">Maintenance</span>
+                            <span class="text-[10px] px-2 py-1 bg-blue-800 rounded border border-blue-700">Networking</span>
+                            <span class="text-[10px] px-2 py-1 bg-blue-800 rounded border border-blue-700">Graphic Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="flex flex-col md:flex-row gap-8 items-start reveal">
+                    <div class="md:w-1/3">
+                        <div class="text-slate-400 font-bold text-xl mb-1">ระยะเวลา 2 ปี</div>
+                        <div class="text-blue-200 text-sm uppercase tracking-tighter">โครงการส่งน้ำและบำรุงรักษาบางพลวง</div>
+                    </div>
+                    <div class="md:w-2/3 bg-white/5 p-8 rounded-3xl border border-white/10">
+                        <h3 class="text-2xl font-bold mb-4">เจ้าพนักงานเครื่องคอมพิวเตอร์ (งานพัสดุ)</h3>
+                        <p class="text-blue-200/80 leading-relaxed">
+                            ปฏิบัติงานด้านพัสดุ การบริหารสัญญาจ้าง การจัดซื้อจัดจ้าง และการตรวจรับพัสดุให้ถูกต้องตามระเบียบกระทรวงการคลัง เป็นหัวใจสำคัญในการบริหารงบประมาณของภาครัฐ
+                        </p>
+                        <div class="mt-6 flex gap-2 text-blue-300">
+                            <span class="flex items-center gap-1 text-xs"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg> บริหารสัญญา</span>
+                            <span class="flex items-center gap-1 text-xs"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg> ระเบียบพัสดุ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 px-6 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">ผลงานและเกียรติประวัติ</h2>
+                <p class="text-slate-500">ความสำเร็จที่ผ่านการพิสูจน์ด้วยความทุ่มเท</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Cert 1 -->
+                <div class="premium-card rounded-[32px] group">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC003_page-0001.jpg" alt="ใบประกาศ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-blue-600 font-bold text-xs uppercase mb-2">Certificate</div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">ใบประกาศเกียรติคุณ</h4>
+                        <p class="text-slate-500 text-sm">การันตีความสามารถและการทำงานที่มีประสิทธิภาพ</p>
+                    </div>
+                </div>
+
+                <!-- Placeholder 1 -->
+                <div class="bg-slate-100 rounded-[32px] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-12 text-center group transition-colors hover:bg-white hover:border-blue-300">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-sm group-hover:bg-blue-900 group-hover:text-white transition-all">📸</div>
+                    <h4 class="font-bold text-slate-800 mb-1 italic">Activity Photo</h4>
+                    <p class="text-slate-400 text-xs">ภาพถ่ายกิจกรรมการสัมมนา/อบรม</p>
+                </div>
+
+                <!-- Placeholder 2 -->
+                <div class="bg-slate-100 rounded-[32px] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-12 text-center group transition-colors hover:bg-white hover:border-blue-300">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-sm group-hover:bg-blue-900 group-hover:text-white transition-all">🤝</div>
+                    <h4 class="font-bold text-slate-800 mb-1 italic">Public Service</h4>
+                    <p class="text-slate-400 text-xs">ภาพกิจกรรมบำเพ็ญประโยชน์</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (New added for more interest) -->
+    <section class="py-24 px-6 bg-white reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-slate-900 mb-6 leading-tight">ทักษะและความสามารถ<br>เฉพาะด้าน</h2>
+                    <p class="text-slate-500 mb-8">ความเชี่ยวชาญที่พร้อมจะผลักดันให้หน่วยงานก้าวหน้าด้วยนวัตกรรมและการบริหารงานที่ถูกต้องแม่นยำ</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-slate-700 text-sm">งานบริหารพัสดุและระเบียบการคลัง</span>
+                                <span class="text-blue-900 font-bold">95%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-900 rounded-full w-[95%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-slate-700 text-sm">การบำรุงรักษาระบบคอมพิวเตอร์และเครือข่าย</span>
+                                <span class="text-blue-900 font-bold">90%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-900 rounded-full w-[90%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-slate-700 text-sm">งานธุรการและสารบรรณอิเล็กทรอนิกส์</span>
+                                <span class="text-blue-900 font-bold">85%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-900 rounded-full w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 text-center">
+                        <div class="text-3xl mb-3">📄</div>
+                        <h5 class="font-bold text-blue-900">E-GP System</h5>
+                        <p class="text-[10px] text-blue-700 uppercase mt-1">Expert User</p>
+                    </div>
+                    <div class="bg-amber-50 p-8 rounded-3xl border border-amber-100 text-center mt-6">
+                        <div class="text-3xl mb-3">🖥️</div>
+                        <h5 class="font-bold text-amber-900">IT Solutions</h5>
+                        <p class="text-[10px] text-amber-700 uppercase mt-1">Technical Skills</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 text-center">
+                        <div class="text-3xl mb-3">🎨</div>
+                        <h5 class="font-bold text-slate-900">Digital PR</h5>
+                        <p class="text-[10px] text-slate-700 uppercase mt-1">Content Creation</p>
+                    </div>
+                    <div class="bg-blue-900 p-8 rounded-3xl text-center mt-6 text-white shadow-xl">
+                        <div class="text-3xl mb-3">🚀</div>
+                        <h5 class="font-bold">Next-Gen</h5>
+                        <p class="text-[10px] text-blue-200 uppercase mt-1">Ready to Serve</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mb-16">
+                <div>
+                    <h3 class="text-3xl font-bold mb-2">นายณัฐชัย โสโภกรม</h3>
+                    <p class="text-blue-300 font-light">มุ่งมั่นรับใช้แผ่นดินด้วยจิตอาสาและปัญญาความรู้</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="mailto:Natthachai78@gmail.com" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </a>
+                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-500 border-t border-white/10 pt-12">
+                <p>© 2024 Professional Public Servant Portfolio. All rights reserved.</p>
+                <div class="flex md:justify-end gap-8">
+                    <span>Email: Natthachai78@gmail.com</span>
+                    <span>Phone: 088-107-2695</span>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- [7] ส่วนควบคุมการทำงาน (Scripts) -->
     <script>
-        const btn = document.getElementById('mobile-menu-btn');
-        btn.addEventListener('click', () => {
-            // ในการใช้งานจริงส่วนนี้จะเปิดเมนูสำหรับมือถือ
-            console.log('Mobile menu clicked');
-        });
+        // Simple reveal animation on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Initial check
+        reveal();
     </script>
 </body>
 </html>
