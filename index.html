@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Natthachai Sophokrom </title>
+    <title>Portfolio Natthachai Sophokrom</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -23,6 +23,16 @@
             align-items: center;
             justify-content: center;
             border: 2px dashed #cbd5e1;
+        }
+        /* ปรับสไตล์รูปภาพให้ดูเป็นมืออาชีพ */
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-img:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -48,8 +58,9 @@
     <section id="about" class="pt-32 pb-20 px-4 bg-white">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="w-64 h-80 md:w-72 md:h-96 rounded-lg overflow-hidden shadow-lg border border-slate-200">
+                <!-- ใส่รูปถ่ายชุดสุภาพของคุณที่นี่ -->
                 <div class="w-full h-full image-placeholder bg-slate-100">
-                    <span class="text-slate-400 text-center p-4">[รูปถ่ายชุดสุภาพ/ชุดกากี]</span>
+                    <span class="text-slate-400 text-center p-4">[กรุณาอัปโหลดรูปชุดกากี/สุภาพ และใส่ลิงก์แทนที่จุดนี้]</span>
                 </div>
             </div>
             <div class="flex-1 text-center md:text-left">
@@ -82,9 +93,6 @@
                     <span class="text-sm font-bold royal-blue uppercase">ปีที่สำเร็จการศึกษา 2560 </span>
                     <h3 class="text-xl font-bold mt-1 text-slate-900">ระดับประกาศนียบัติวิชาชีพชั้นสูง สาขาวิชาเทคโนโลยีคอมพิวเตอร์ </h3>
                     <p class="text-slate-600 text-lg">วิทยาลัยเทคนิคอุบลราชธานี </p>
-                    <div class="mt-2 text-sm text-slate-500 bg-white p-3 rounded border border-slate-200 inline-block">
-                        <strong>โครงการจบการศึกษา:</strong> [ระบุชื่อหัวข้อที่เกี่ยวข้องกับตำแหน่งงาน]
-                    </div>
                 </div>
                 <div class="mb-10 ml-6">
                     <span class="absolute -left-[9px] w-4 h-4 bg-blue-400 rounded-full"></span>
@@ -110,8 +118,7 @@
                         <span class="text-sm font-bold text-slate-500"> ปัจจุบัน </span>
                     </div>
                     <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน ซ่อมบำรุงเครื่องคอมพิวเตอร์ เครื่องปริ้นเตอร์ ระบบเครื่องข่ายในสำนักงาน และติดตามถ่ายรูปเพื่องานประชาสัมพันธ์  </li>
-                        <li>ประสานงานร่วมกับหน่วยงาน ฝ่ายงานและหน่วยงานอื่นที่เกี่ยวข้องกับงานที่ทำ </li>
+                        <li>รับผิดชอบงานด้าน ซ่อมบำรุงเครื่องคอมพิวเตอร์ เครื่องปริ้นเตอร์ ระบบเครื่องข่ายในสำนักงาน และติดตามถ่ายรูปเพื่องานประชาสัมพันธ์ </li>
                     </ul>
                  </div>
                  <div class="p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors">
@@ -123,49 +130,9 @@
                         <span class="text-sm font-bold text-slate-500"> 2 ปี </span>
                     </div>
                     <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน เอกสารงานด้านพัสดุ บริหารสัญญา ตรวจรับพัสดุ  </li>
-                        <li>ประสานงานร่วมกับหน่วยงาน ฝ่ายงานและหน่วยงานอื่นที่เกี่ยวข้องกับงานที่ทำ </li>
+                        <li>รับผิดชอบงานด้าน เอกสารงานด้านพัสดุ บริหารสัญญา ตรวจรับพัสดุ </li>
                     </ul>
                  </div>
-                 <div class="p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors">
-                    <div class="flex flex-col sm:flex-row justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">ตำแหน่งงาน พนักงานทั่วไป</h3>
-                            <p class="text-blue-700 font-medium">ฝ่ายก่อสร้างที่ 2 สำนักงานก่อสร้างชลประทานขนาดกลางที่ 7 อุบลราชธานี</p>
-                        </div>
-                        <span class="text-sm font-bold text-slate-500"> 1 ปี </span>
-                    </div>
-                    <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน รายงานผลการดำเนินการประจำเดือน ติดตามผลการดำเนินงานและบันทึกข้อมูล </li>
-                        <li>ประสานงานร่วมกับหน่วยงาน ฝ่ายงานและหน่วยงานอื่นที่เกี่ยวข้องกับงานที่ทำ </li>
-                    </ul>
-                 </div>
-                 <div class="p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors">
-                    <div class="flex flex-col sm:flex-row justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">ตำแหน่งงาน Visual&Audio </h3>
-                            <p class="text-blue-700 font-medium"> บริษัท สินทรัพย์ก้าวหน้า จำกัด </p>
-                        </div>
-                        <span class="text-sm font-bold text-slate-500"> 1 ปี </span>
-                    </div>
-                    <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน ระบบห้องประชุม ระบบเสียง ระบบไฟ </li>
-                        <li>ประสานงานร่วมกับหน่วยงาน ฝ่ายงานและหน่วยงานอื่นที่เกี่ยวข้องกับงานที่ทำ </li>
-                    </ul>
-                 </div>
-                <div class="p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors">
-                    <div class="flex flex-col sm:flex-row justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900">ตำแหน่งงาน ช่างเทคนิค</h3>
-                            <p class="text-blue-700 font-medium">หจก เอ็มเคเอ็ม พรีเมี่ยมแบรนด์ </p>
-                        </div>
-                        <span class="text-sm font-bold text-slate-500"> 1 ปี </span>
-                    </div>
-                    <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm leading-relaxed">
-                        <li>รับผิดชอบงานด้าน ตรวจสอบและซ่อมบำรุงเครื่องจักรผลิตน้ำดื่ม </li>
-                        <li>ประสานงานร่วมกับหน่วยงาน [ระบุ]</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -178,25 +145,38 @@
                 <p class="text-slate-500 mt-2">ภาพกิจกรรมและใบประกาศเกียรติคุณที่ภาคภูมิใจ</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="h-48 image-placeholder"><span class="text-slate-400">[รูปภาพใบประกาศ]</span></div>
+                <!-- ชิ้นงานที่ 1: แสดงรูปจาก GitHub ของคุณ -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden group">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC003_page-0001.jpg" 
+                             alt="ใบประกาศเกียรติคุณ" 
+                             class="portfolio-img">
+                    </div>
                     <div class="p-5">
-                        <h3 class="font-bold text-lg mb-2 text-slate-900">รางวัล/ผลงานที่ 1</h3>
-                        <p class="text-slate-600 text-sm">[รายละเอียดสั้นๆ]</p>
+                        <h3 class="font-bold text-lg mb-2 text-slate-900">ใบประกาศเกียรติคุณ</h3>
+                        <p class="text-slate-600 text-sm">รายละเอียดกิจกรรมหรือรางวัลที่ได้รับจากการทำงานหรือการศึกษา</p>
                     </div>
                 </div>
+
+                <!-- ช่องสำรองที่ 2 -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="h-48 image-placeholder"><span class="text-slate-400">[รูปภาพอบรม]</span></div>
+                    <div class="h-56 image-placeholder">
+                        <span class="text-slate-400">[รูปภาพอบรม]</span>
+                    </div>
                     <div class="p-5">
                         <h3 class="font-bold text-lg mb-2 text-slate-900">การอบรม/สัมมนา</h3>
-                        <p class="text-slate-600 text-sm">[รายละเอียดสั้นๆ]</p>
+                        <p class="text-slate-600 text-sm">การพัฒนาตนเองในด้านต่างๆ ที่เกี่ยวข้องกับสายงาน</p>
                     </div>
                 </div>
+
+                <!-- ช่องสำรองที่ 3 -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="h-48 image-placeholder"><span class="text-slate-400">https://github.com/natthachai-s/Portfolio-Website/blob/main/DOC003_page-0001.jpg</span></div>
+                    <div class="h-56 image-placeholder">
+                        <span class="text-slate-400">[รูปภาพกิจกรรม]</span>
+                    </div>
                     <div class="p-5">
                         <h3 class="font-bold text-lg mb-2 text-slate-900">กิจกรรมเสริมหลักสูตร</h3>
-                        <p class="text-slate-600 text-sm">[รายละเอียดสั้นๆ]</p>
+                        <p class="text-slate-600 text-sm">กิจกรรมอื่นๆ ที่แสดงถึงความมุ่งมั่นและความรับผิดชอบ</p>
                     </div>
                 </div>
             </div>
@@ -216,7 +196,8 @@
     <script>
         const btn = document.getElementById('mobile-menu-btn');
         btn.addEventListener('click', () => {
-            alert('เมนูจะแสดงผลเมื่อใช้งานบนอุปกรณ์พกพา');
+            // ในการใช้งานจริงส่วนนี้จะเปิดเมนูสำหรับมือถือ
+            console.log('Mobile menu clicked');
         });
     </script>
 </body>
