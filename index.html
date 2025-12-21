@@ -72,16 +72,71 @@
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
         }
 
-        .timeline-dot::after {
-            content: "";
+        .profile-img-frame {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        /* Modal / Lightbox Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
-            background: var(--primary-blue);
-            border-radius: 50%;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-gold);
+            transform: rotate(90deg);
         }
 
         /* Animation for section entry */
@@ -97,6 +152,12 @@
     </style>
 </head>
 <body class="site-wrapper">
+
+    <!-- Modal for Image Zoom -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="imgFull">
+    </div>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav">
@@ -155,11 +216,8 @@
             
             <div class="order-1 lg:order-2 flex justify-center">
                 <div class="image-container shadow-2xl">
-                    <div class="bg-white rounded-[18px] overflow-hidden w-full max-w-[380px] aspect-[3/4] flex items-center justify-center text-slate-300">
-                        <div class="text-center p-10">
-                            <svg class="w-20 h-20 mx-auto mb-4 opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                            <p class="font-medium text-slate-400 text-sm">[ แนะนำ: รูปถ่ายในเครื่องแบบราชการ หรือ ชุดสูทสากล เพื่อความเป็นมืออาชีพสูงสุด ]</p>
-                        </div>
+                    <div class="profile-img-frame">
+                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/IMG_4465.jpeg" alt="Natthachai Sophokrom" onerror="this.src='https://via.placeholder.com/380x507?text=Profile+Image'">
                     </div>
                     <!-- Decorative badges -->
                     <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden md:block">
@@ -214,7 +272,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Edu Card 1 -->
                 <div class="premium-card p-10 rounded-[32px]">
                     <div class="flex gap-6">
                         <div class="hidden sm:flex flex-col items-center">
@@ -233,7 +290,6 @@
                     </div>
                 </div>
 
-                <!-- Edu Card 2 -->
                 <div class="premium-card p-10 rounded-[32px]">
                     <div class="flex gap-6">
                         <div class="hidden sm:flex flex-col items-center">
@@ -256,7 +312,6 @@
 
     <!-- Experience Section -->
     <section id="experience" class="py-24 bg-blue-900 text-white px-6 relative overflow-hidden">
-        <!-- Abstract background elements -->
         <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
             <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] border-[60px] border-white rounded-full"></div>
             <div class="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] border-[1px] border-white rounded-full"></div>
@@ -269,7 +324,6 @@
             </div>
 
             <div class="space-y-12">
-                <!-- Job 1 -->
                 <div class="flex flex-col md:flex-row gap-8 items-start reveal">
                     <div class="md:w-1/3">
                         <div class="text-amber-400 font-bold text-xl mb-1">ปัจจุบัน</div>
@@ -289,7 +343,6 @@
                     </div>
                 </div>
 
-                <!-- Job 2 -->
                 <div class="flex flex-col md:flex-row gap-8 items-start reveal">
                     <div class="md:w-1/3">
                         <div class="text-slate-400 font-bold text-xl mb-1">ระยะเวลา 2 ปี</div>
@@ -307,7 +360,7 @@
                         </div>
                     </div>
                 </div>
-             <!-- Job 3 -->
+
                 <div class="flex flex-col md:flex-row gap-8 items-start reveal">
                     <div class="md:w-1/3">
                         <div class="text-slate-400 font-bold text-xl mb-1">ระยะเวลา 1 ปี</div>
@@ -319,10 +372,6 @@
                         <p class="text-blue-200/80 leading-relaxed">
                             ปฏิบัติงานด้าน ติดตามการดำเนินงานก่อสร้าง รายงานผลการดำเนินงานประจำเดือน ลงพื้นที่ติดตามงานก่อสร้าง ติดต่อประสานงานผู้นำท้องที่เพื่อจัดทำประชาคม
                         </p>
-                        <div class="mt-6 flex gap-2 text-blue-300">
-                            <span class="flex items-center gap-1 text-xs"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg> บริหารสัญญา</span>
-                            <span class="flex items-center gap-1 text-xs"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg> ระเบียบพัสดุ</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -334,14 +383,13 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-4xl font-bold text-slate-900 mb-4">ผลงานและเกียรติประวัติ</h2>
-                <p class="text-slate-500">ความสำเร็จที่ผ่านการพิสูจน์ด้วยความทุ่มเท</p>
+                <p class="text-slate-500">คลิกที่รูปภาพเพื่อขยายใหญ่</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Cert 1 -->
-                <div class="premium-card rounded-[32px] group">
+                <div class="premium-card rounded-[32px] group cursor-pointer" onclick="openModal(this)">
                     <div class="aspect-[4/3] overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC003_page-0001.jpg" alt="ใบประกาศ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC003_page-0001.jpg" alt="ใบประกาศเกียรติคุณ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="p-8">
                         <div class="text-blue-600 font-bold text-xs uppercase mb-2">Certificate</div>
@@ -350,10 +398,9 @@
                     </div>
                 </div>
 
-                <!-- Placeholder 1 -->
-                <div class="premium-card rounded-[32px] group">
+                <div class="premium-card rounded-[32px] group cursor-pointer" onclick="openModal(this)">
                     <div class="aspect-[4/3] overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC002_page-0001.jpg" alt="ใบประกาศ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC002_page-0001.jpg" alt="ใบประกาศเกียรติคุณ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="p-8">
                         <div class="text-blue-600 font-bold text-xs uppercase mb-2">Certificate</div>
@@ -362,10 +409,9 @@
                     </div>
                 </div>
 
-                <!-- Placeholder 2 -->
-                <div class="premium-card rounded-[32px] group">
+                <div class="premium-card rounded-[32px] group cursor-pointer" onclick="openModal(this)">
                     <div class="aspect-[4/3] overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC005_page-0001.jpg" alt="ใบประกาศ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/DOC005_page-0001.jpg" alt="ใบประกาศเกียรติคุณ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="p-8">
                         <div class="text-blue-600 font-bold text-xs uppercase mb-2">Certificate</div>
@@ -377,7 +423,7 @@
         </div>
     </section>
 
-    <!-- Skills Section (New added for more interest) -->
+    <!-- Skills Section -->
     <section class="py-24 px-6 bg-white reveal">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -453,9 +499,6 @@
                     <a href="mailto:Natthachai78@gmail.com" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </a>
-                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                    </div>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-500 border-t border-white/10 pt-12">
@@ -469,6 +512,22 @@
     </footer>
 
     <script>
+        // Zoom functionality
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imgFull");
+
+        function openModal(element) {
+            const imgSrc = element.querySelector('img').src;
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+            document.body.style.overflow = 'hidden'; // ป้องกันการเลื่อนหน้าจอขณะเปิดดูรูป
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto'; // คืนค่าการเลื่อนหน้าจอ
+        }
+
         // Simple reveal animation on scroll
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -481,6 +540,7 @@
                 }
             }
         }
+        
         window.addEventListener("scroll", reveal);
         // Initial check
         reveal();
