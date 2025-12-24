@@ -68,16 +68,17 @@
         .image-container {
             position: relative;
             border-radius: 24px;
-            padding: 12px;
+            padding: 8px;
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            width: fit-content;
         }
 
         .profile-img-frame {
             background: white;
             border-radius: 18px;
             overflow: hidden;
-            width: 80%;
-            max-width: 380px;
+            /* ปรับขนาดให้เล็กลงในมือถือ (w-64) และใหญ่ขึ้นใน Desktop (md:w-80) */
+            width: 240px; 
             aspect-ratio: 3/4;
             display: flex;
             align-items: center;
@@ -85,9 +86,18 @@
             position: relative;
         }
 
+        @media (min-width: 768px) {
+            .profile-img-frame {
+                width: 320px;
+            }
+            .image-container {
+                padding: 12px;
+            }
+        }
+
         .profile-img-frame img {
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center top;
         }
@@ -100,8 +110,8 @@
             padding-top: 50px;
             left: 0;
             top: 0;
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             overflow: auto;
             background-color: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(5px);
@@ -180,80 +190,83 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section min-h-screen flex items-center pt-20 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="order-2 lg:order-1">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-6">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-                    </span>
-                    ข้าราชการยุคใหม่ มุ่งมั่น มั่นคง
-                </div>
-                <h1 class="text-5xl lg:text-7xl font-bold text-slate-900 mb-4 leading-tight">
-                    นายณัฐชัย <br><span class="text-blue-900">โสโภกรม</span>
-                </h1>
-                <p class="text-2xl text-slate-600 mb-8 font-light italic">"เจ้าพนักงานธุรการปฏิบัติงาน"</p>
-                
-                <div class="grid grid-cols-2 gap-6 mb-10">
-                    <div class="border-l-4 border-amber-400 pl-4">
-                        <div class="text-3xl font-bold text-slate-800">6+</div>
-                        <div class="text-sm text-slate-500">ปี ประสบการณ์หน่วยงานราชการ</div>
-                    </div>
-                    <div class="border-l-4 border-blue-600 pl-4">
-                        <div class="text-3xl font-bold text-slate-800">IT</div>
-                        <div class="text-sm text-slate-500">เทคโนโลยี</div>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="#experience" class="px-8 py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition shadow-xl flex items-center gap-2">
-                        ดูประวัติการทำงาน
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </a>
-                </div>
-            </div>
+    <section id="home" class="hero-section min-h-screen flex items-center pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
+            <!-- Profile Image Container -->
             <div class="order-1 lg:order-2 flex justify-center">
                 <div class="image-container shadow-2xl">
                     <div class="profile-img-frame">
                         <img src="https://raw.githubusercontent.com/natthachai-s/Portfolio-Website/main/IMG_4465.jpeg" alt="Natthachai Sophokrom" onerror="this.src='https://via.placeholder.com/380x507?text=Profile+Image'">
                     </div>
                     <!-- Decorative badges -->
-                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden md:block">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">✓</div>
+                    <div class="absolute -bottom-4 -right-4 bg-white p-3 rounded-2xl shadow-xl border border-slate-100 hidden md:block">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xs">✓</div>
                             <div>
-                                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Status</p>
-                                <p class="text-sm font-bold text-slate-800">พร้อมปฏิบัติหน้าที่</p>
+                                <p class="text-[8px] text-slate-400 uppercase font-bold tracking-wider">Status</p>
+                                <p class="text-[12px] font-bold text-slate-800">พร้อมปฏิบัติหน้าที่</p>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Intro Text -->
+            <div class="order-2 lg:order-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-6 mx-auto lg:mx-0">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                    </span>
+                    ข้าราชการยุคใหม่ มุ่งมั่น มั่นคง
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold text-slate-900 mb-4 leading-tight">
+                    นายณัฐชัย <br><span class="text-blue-900">โสโภกรม</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-600 mb-8 font-light italic">"เจ้าพนักงานธุรการปฏิบัติงาน"</p>
+                
+                <div class="grid grid-cols-2 gap-4 md:gap-6 mb-10 max-w-sm mx-auto lg:mx-0 text-left">
+                    <div class="border-l-4 border-amber-400 pl-4">
+                        <div class="text-2xl md:text-3xl font-bold text-slate-800">6+</div>
+                        <div class="text-xs md:text-sm text-slate-500">ปี ประสบการณ์</div>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <div class="text-2xl md:text-3xl font-bold text-slate-800">IT</div>
+                        <div class="text-xs md:text-sm text-slate-500">เทคโนโลยี</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                    <a href="#experience" class="px-8 py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition shadow-xl flex items-center gap-2">
+                        ดูประวัติการทำงาน
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Motto / Vision -->
-    <section class="py-20 px-6">
+    <section class="py-12 md:py-20 px-6">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-[40px] p-12 shadow-sm border border-slate-100 relative overflow-hidden">
+            <div class="bg-white rounded-[32px] md:rounded-[40px] p-8 md:p-12 shadow-sm border border-slate-100 relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-8 opacity-5">
-                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.01703C7.91246 16 7.01703 16.8954 7.01703 18L7.01703 21H14.017ZM21 21L21 18C21 16.8954 20.1046 16 19 16H16C14.8954 16 14 16.8954 14 18L14 21H21ZM12.017 14C14.2261 14 16.017 12.2091 16.017 10C16.017 7.79086 14.2261 6 12.017 6C9.80789 6 8.01703 7.79086 8.01703 10C8.01703 12.2091 9.80789 14 12.017 14ZM19 14C20.6569 14 22 12.6569 22 11C22 9.34315 20.6569 8 19 8C17.3431 8 16 9.34315 16 11C16 12.6569 17.3431 14 19 14Z"/></svg>
+                    <svg class="w-24 h-24 md:w-32 md:h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.01703C7.91246 16 7.01703 16.8954 7.01703 18L7.01703 21H14.017ZM21 21L21 18C21 16.8954 20.1046 16 19 16H16C14.8954 16 14 16.8954 14 18L14 21H21ZM12.017 14C14.2261 14 16.017 12.2091 16.017 10C16.017 7.79086 14.2261 6 12.017 6C9.80789 6 8.01703 7.79086 8.01703 10C8.01703 12.2091 9.80789 14 12.017 14ZM19 14C20.6569 14 22 12.6569 22 11C22 9.34315 20.6569 8 19 8C17.3431 8 16 9.34315 16 11C16 12.6569 17.3431 14 19 14Z"/></svg>
                 </div>
                 <div class="relative z-10 text-center">
-                    <h2 class="text-xl font-bold text-blue-900 mb-6 flex items-center justify-center gap-3">
+                    <h2 class="text-lg md:text-xl font-bold text-blue-900 mb-6 flex items-center justify-center gap-3">
                         <span class="w-10 h-[1px] bg-blue-200"></span>
                         วิสัยทัศน์และการทำงาน
                         <span class="w-10 h-[1px] bg-blue-200"></span>
                     </h2>
-                    <blockquote class="text-2xl md:text-3xl font-medium text-slate-800 leading-relaxed mb-8">
+                    <blockquote class="text-xl md:text-3xl font-medium text-slate-800 leading-relaxed mb-8">
                         "มุ่งมั่นปฏิบัติหน้าที่ด้วยความซื่อสัตย์ สุจริต <br class="hidden md:block"> ยึดถือประโยชน์ส่วนรวมและประชาชนเป็นที่ตั้ง"
                     </blockquote>
-                    <div class="flex justify-center gap-4 flex-wrap">
-                        <span class="px-4 py-2 bg-slate-50 rounded-full text-sm text-slate-600 border border-slate-100">#วินัย</span>
-                        <span class="px-4 py-2 bg-slate-50 rounded-full text-sm text-slate-600 border border-slate-100">#โปร่งใส</span>
-                        <span class="px-4 py-2 bg-slate-50 rounded-full text-sm text-slate-600 border border-slate-100">#บริการประชาชน</span>
+                    <div class="flex justify-center gap-3 flex-wrap">
+                        <span class="px-4 py-2 bg-slate-50 rounded-full text-xs md:text-sm text-slate-600 border border-slate-100">#วินัย</span>
+                        <span class="px-4 py-2 bg-slate-50 rounded-full text-xs md:text-sm text-slate-600 border border-slate-100">#โปร่งใส</span>
+                        <span class="px-4 py-2 bg-slate-50 rounded-full text-xs md:text-sm text-slate-600 border border-slate-100">#บริการประชาชน</span>
                     </div>
                 </div>
             </div>
@@ -335,7 +348,7 @@
                         <p class="text-blue-100 leading-relaxed">
                             ดูแลและซ่อมบำรุงรักษาเครื่องคอมพิวเตอร์ เครื่องพิมพ์ ระบบเครือข่ายภายในหน่วยงาน ระบบห้องประชุมการประชุมออนไลน์ ติดตามลงพื้นที่เพื่อบันทึกภาพทำสื่อประชาสัมพันธ์
                         </p>
-                        <div class="mt-6 flex gap-2">
+                        <div class="mt-6 flex flex-wrap gap-2">
                             <span class="text-[10px] px-2 py-1 bg-blue-800 rounded border border-blue-700">Maintenance</span>
                             <span class="text-[10px] px-2 py-1 bg-blue-800 rounded border border-blue-700">Networking</span>
                             <span class="text-[10px] px-2 py-1 bg-blue-800 rounded border border-blue-700">Zoom Meeting</span>
@@ -347,31 +360,17 @@
                     <div class="md:w-1/3">
                         <div class="text-slate-400 font-bold text-xl mb-1">ระยะเวลา 2 ปี</div>
                         <div class="text-blue-200 text-sm uppercase tracking-tighter">งานพัสดุ ฝ่ายบริหารทั่วไป</div>
-                        <div class="text-blue-200 text-sm uppercase tracking-tighter">โครงการส่งน้ำและบำรุงรักษาบางพลวง สำนักงานชลประทานที่ 9</div>
+                        <div class="text-blue-200 text-sm uppercase tracking-tighter">โครงการส่งน้ำและบำรุงรักษาบางพลวง</div>
                     </div>
                     <div class="md:w-2/3 bg-white/5 p-8 rounded-3xl border border-white/10">
                         <h3 class="text-2xl font-bold mb-4">เจ้าพนักงานเครื่องคอมพิวเตอร์ (งานพัสดุ)</h3>
                         <p class="text-blue-200/80 leading-relaxed">
                             ปฏิบัติงานด้านพัสดุ การบริหารสัญญาจ้าง การจัดซื้อจัดจ้าง การตรวจรับพัสดุให้ถูกต้องตามระเบียบกระทรวงการคลัง และดูแลควบคุมการรับ-จ่ายคลังน้ำมันเชื้อเพลิงและหล่อลื่น
                         </p>
-                        <div class="mt-6 flex gap-2 text-blue-300">
+                        <div class="mt-6 flex gap-3 text-blue-300">
                             <span class="flex items-center gap-1 text-xs"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg> บริหารสัญญา</span>
                             <span class="flex items-center gap-1 text-xs"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg> ระเบียบพัสดุ</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row gap-8 items-start reveal">
-                    <div class="md:w-1/3">
-                        <div class="text-slate-400 font-bold text-xl mb-1">ระยะเวลา 3 ปี</div>
-                        <div class="text-blue-200 text-sm uppercase tracking-tighter">ฝ่ายก่อสร้างที่ 2</div>
-                        <div class="text-blue-200 text-sm uppercase tracking-tighter">สำนักงานก่อสร้างชลประทานขนาดกลางที่ 7 กองพัฒนาแหล่งน้ำขนาดกลาง</div>
-                    </div>
-                    <div class="md:w-2/3 bg-white/5 p-8 rounded-3xl border border-white/10">
-                        <h3 class="text-2xl font-bold mb-4">พนักงานทั่วไป</h3>
-                        <p class="text-blue-200/80 leading-relaxed">
-                            ปฏิบัติงานด้าน ติดตามการดำเนินงานก่อสร้าง รายงานผลการดำเนินงานประจำเดือน ลงพื้นที่ติดตามงานก่อสร้าง ติดต่อประสานงานผู้นำท้องที่เพื่อจัดทำประชาคม
-                        </p>
                     </div>
                 </div>
             </div>
@@ -462,22 +461,22 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 text-center">
+                    <div class="bg-blue-50 p-6 md:p-8 rounded-3xl border border-blue-100 text-center">
                         <div class="text-3xl mb-3">🖥️</div>
                         <h5 class="font-bold text-amber-900">IT Solutions</h5>
                         <p class="text-[10px] text-amber-700 uppercase mt-1">Technical Skills</p>
                     </div>
-                    <div class="bg-amber-50 p-8 rounded-3xl border border-amber-100 text-center mt-6">
+                    <div class="bg-amber-50 p-6 md:p-8 rounded-3xl border border-amber-100 text-center mt-6">
                         <div class="text-3xl mb-3">📄</div>
                         <h5 class="font-bold text-blue-900">E-GP System</h5>
                         <p class="text-[10px] text-blue-700 uppercase mt-1">Expert User</p>
                     </div>
-                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 text-center">
+                    <div class="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 text-center">
                         <div class="text-3xl mb-3">🎨</div>
                         <h5 class="font-bold text-slate-900">Digital PR</h5>
                         <p class="text-[10px] text-slate-700 uppercase mt-1">Content Creation</p>
                     </div>
-                    <div class="bg-blue-900 p-8 rounded-3xl text-center mt-6 text-white shadow-xl">
+                    <div class="bg-blue-900 p-6 md:p-8 rounded-3xl text-center mt-6 text-white shadow-xl">
                         <div class="text-3xl mb-3">🚀</div>
                         <h5 class="font-bold">Next-Gen</h5>
                         <p class="text-[10px] text-blue-200 uppercase mt-1">Ready to Serve</p>
@@ -502,8 +501,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-500 border-t border-white/10 pt-12">
-                <p>© 2024 Professional Public Servant Portfolio. All rights reserved.</p>
-                <div class="flex md:justify-end gap-8">
+                <p>© 2024 Professional Public Servant Portfolio.</p>
+                <div class="flex flex-col md:items-end gap-2">
                     <span>Email: Natthachai78@gmail.com</span>
                     <span>Phone: 088-107-2695</span>
                 </div>
@@ -520,12 +519,12 @@
             const imgSrc = element.querySelector('img').src;
             modal.style.display = "block";
             modalImg.src = imgSrc;
-            document.body.style.overflow = 'hidden'; // ป้องกันการเลื่อนหน้าจอขณะเปิดดูรูป
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
             modal.style.display = "none";
-            document.body.style.overflow = 'auto'; // คืนค่าการเลื่อนหน้าจอ
+            document.body.style.overflow = 'auto'; 
         }
 
         // Simple reveal animation on scroll
@@ -534,7 +533,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
+                var elementVisible = 100;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
@@ -542,7 +541,6 @@
         }
         
         window.addEventListener("scroll", reveal);
-        // Initial check
         reveal();
     </script>
 </body>
